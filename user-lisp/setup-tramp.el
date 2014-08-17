@@ -5,7 +5,7 @@
 (add-to-list 'exec-path "~/.emacs.d/site-lisp/vagrant-tramp")
 (eval-after-load 'tramp
   '(progn
-     (require 'vagrant-tramp)))
+     (require 'vagrant)))
 
 ;(set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
 
