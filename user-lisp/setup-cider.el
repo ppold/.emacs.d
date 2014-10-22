@@ -2,14 +2,18 @@
 
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (setq nrepl-hide-special-buffers t)
-(setq cider-repl-pop-to-buffer-on-connect nil)
+;; (setq cider-repl-tab-command 'indent-for-tab-command)
+;; (setq cider-repl-pop-to-buffer-on-connect nil)
+(setq cider-stacktrace-fill-column 80)
 (setq cider-popup-stacktraces nil)
 (setq cider-repl-popup-stacktraces t)
 (setq cider-auto-select-error-buffer t)
-(setq cider-stacktrace-default-filters '(tooling dup))
+(setq cider-stacktrace-default-filters '(java tooling dup))
 (setq nrepl-buffer-name-separator "-")
 (setq nrepl-buffer-name-show-port t)
-(setq cider-repl-display-in-current-window t)
+(setq cider-prefer-local-resources t)
+;; (setq cider-repl-display-in-current-window t)
+;; (setq cider-repl-shortcut-dispatch-char ?\:)
 (setq cider-repl-print-length 100)
 (setq cider-prompt-save-file-on-load nil)
 (setq cider-repl-result-prefix ";; => ")
@@ -25,21 +29,21 @@
 ;; Indent and highlight more commands
 (put-clojure-indent 'match 'defun)
 
-(require 'ac-nrepl)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(require 'ac-cider)
+(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
 (eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-repl-mode))
+  '(add-to-list 'ac-modes 'cider-mode))
 
 (defun set-auto-complete-as-completion-at-point-function ()
   (setq completion-at-point-functions '(auto-complete)))
-(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
-(add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
 (add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
-(eval-after-load "cider"
-  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
+;; (eval-after-load "cider"
+;;   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
 (define-clojure-indent
   (fact 'defun)

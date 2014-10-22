@@ -1,4 +1,4 @@
-(setq visible-bell t
+(setq visible-bell nil
       font-lock-maximum-decoration t
       color-theme-is-global t
       truncate-partial-width-windows nil)
@@ -16,7 +16,7 @@
 
 (when (window-system)
   (set-frame-font "Monaco")
-  (set-face-attribute 'default nil :family "Monaco" :height 110 :weight 'bold)
+  (set-face-attribute 'default nil :family "Monaco" :height 140)
   (set-face-font 'default "Monaco"))
 (load-theme 'zenburn)
 
@@ -40,5 +40,10 @@
 (set-face-attribute 'mode-line nil  :inverse-video nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)
 (set-face-attribute 'vertical-border nil :foreground "#383838")
+
+(add-hook 'prog-mode-hook (defun pnh-add-watchwords ()
+                            (font-lock-add-keywords
+                             nil `(("\\<\\(FIX\\(ME\\)?\\|TODO\\)"
+                                  1 font-lock-warning-face t)))))
 
 (provide 'appearance)

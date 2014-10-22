@@ -1,7 +1,7 @@
 ;; helm
 (global-set-key (kbd "C-c o") 'helm-overlord)
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-<SPC>") 'helm-M-x)
+(global-set-key (kbd "C-0") 'helm-M-x)
 (global-set-key (kbd "C-§") 'helm-yas-complete)
 
 ;; Org

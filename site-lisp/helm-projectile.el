@@ -6,8 +6,8 @@
 ;; URL: https://github.com/bbatsov/projectile
 ;; Created: 2011-31-07
 ;; Keywords: project, convenience
-;; Version: 0.10.0
-;; Package-Requires: ((helm "1.4.0") (projectile "0.10.0") (cl-lib "0.3"))
+;; Version: 0.11.0
+;; Package-Requires: ((helm "1.4.0") (projectile "0.11.0") (cl-lib "0.3"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -45,6 +45,12 @@
 (require 'helm-buffers)
 (require 'helm-files)
 (require 'cl-lib)
+
+(defgroup helm-projectile nil
+  "Helm support for projectile."
+  :prefix "helm-projectile-"
+  :group 'projectile
+  :link `(url-link :tag "helm-projectile homepage" "https://github.com/bbatsov/projectile"))
 
 (defvar helm-projectile-current-project-root)
 
@@ -93,7 +99,7 @@
                   (setq helm-buffer-max-len-mode (cdr result))))))
     (candidates . helm-projectile-buffers-list-cache)
     (type . buffer)
-    (match helm-buffer-match-major-mode)
+    (match helm-buffers-list--match-fn)
     (persistent-action . helm-buffers-list-persistent-action)
     (keymap . ,helm-buffer-map)
     (volatile)
@@ -117,14 +123,22 @@
     (action . (lambda (file) (find-file file))))
   "Helm source definition.")
 
+(defcustom helm-projectile-sources-list
+  '(helm-source-projectile-files-list
+    helm-source-projectile-buffers-list
+    helm-source-projectile-recentf-list)
+  "Default sources for `helm-projectile'."
+  :group 'helm-projectile)
+
 ;;;###autoload
-(defun helm-projectile ()
-  "Use projectile with Helm instead of ido."
-  (interactive)
+(defun helm-projectile (&optional arg)
+  "Use projectile with Helm instead of ido.
+
+With a prefix ARG invalidates the cache first."
+  (interactive "P")
+  (projectile-maybe-invalidate-cache arg)
   (let ((helm-ff-transformer-show-only-basename nil))
-    (helm :sources '(helm-source-projectile-files-list
-                     helm-source-projectile-buffers-list
-                     helm-source-projectile-recentf-list)
+    (helm :sources helm-projectile-sources-list
           :buffer "*helm projectile*"
           :prompt (projectile-prepend-project-name "pattern: "))))
 

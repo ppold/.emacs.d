@@ -63,6 +63,12 @@
   (custom-persp "@Twitter" (twit)))
 (define-key persp-mode-map (kbd "C-x p t") 'custom-persp/twitter)
 
+(defun custom-persp/gnus ()
+  (interactive)
+  (custom-persp "@GNUS" (gnus)))
+(define-key persp-mode-map (kbd "C-x p g") 'custom-persp/gnus)
+
+
 (defun custom-persp/org ()
   (interactive)
   (custom-persp "@org"

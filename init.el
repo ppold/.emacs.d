@@ -45,6 +45,7 @@
 (defun init--install-packages ()
   (packages-install
    '(dired-details
+     dired+
      auto-complete
      gist
      yasnippet
@@ -52,10 +53,11 @@
      ido-ubiquitous
      evil
      evil-visualstar
-     surround
+     evil-surround
      smartparens
      rainbow-delimiters
      magit
+     magit-gitflow
      git-gutter
      helm
      helm-themes
@@ -73,20 +75,25 @@
      diminish
      pretty-mode
      org-plus-contrib
+     htmlize
      jabber
      twittering-mode
      itail
      prodigy
      restclient
+     w3m
 
      ;; OSX
      erc-terminal-notifier
      dash-at-point
 
+     ;; Lisp
+     slime
+     ac-slime
+
      ;; Clojure
-     ac-nrepl
+     ac-cider
      cider
-     cider-tracing
      clj-refactor
      clojure-cheatsheet
      clojure-snippets
@@ -100,6 +107,8 @@
 
      ;; HTML
      emmet-mode
+     web-mode
+     sass-mode
 
      ;; Python
      virtualenvwrapper
@@ -113,6 +122,9 @@
      js2-refactor
      ac-js2
      skewer-mode
+
+     php-mode
+     haskell-mode
      )))
 
 (condition-case nil
@@ -142,3 +154,10 @@
 ;; Load user specific configuration
 (when (file-exists-p user-lisp-dir)
   (mapc 'load (directory-files user-lisp-dir nil "^[^#].*el$")))
+
+;; cjsx files as coffee
+(setq auto-mode-alist
+      (append '((".*\\.cjsx\\'" . coffee-mode))
+              auto-mode-alist))
+
+(provide 'alex-cjsx)
