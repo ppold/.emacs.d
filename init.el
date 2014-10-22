@@ -16,7 +16,7 @@
       (expand-file-name "user-lisp" user-emacs-directory))
 
 ;; Set up load path
-(add-to-list 'load-path user-emacs-directory)
+;; (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path user-lisp-dir)
 
@@ -76,7 +76,6 @@
      pretty-mode
      org-plus-contrib
      htmlize
-     jabber
      twittering-mode
      itail
      prodigy
