@@ -17,6 +17,8 @@
 (when (window-system)
   (set-frame-font "Monaco")
   (set-face-attribute 'default nil :family "Monaco" :height 140)
+  (custom-set-faces
+   '(auto-dim-other-buffers-face ((t (:background "#494949")))))
   (set-face-font 'default "Monaco"))
 (load-theme 'zenburn)
 
