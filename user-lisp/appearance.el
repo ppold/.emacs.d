@@ -17,6 +17,9 @@
 (when (window-system)
   (set-frame-font "Monaco")
   (set-face-attribute 'default nil :family "Monaco" :height 140)
+  (add-hook 'after-init-hook (lambda ()
+                               (when (fboundp 'auto-dim-other-buffers-mode)
+                                 (auto-dim-other-buffers-mode t))))
   (custom-set-faces
    '(auto-dim-other-buffers-face ((t (:background "#494949")))))
   (set-face-font 'default "Monaco"))
