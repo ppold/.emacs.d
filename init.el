@@ -126,6 +126,9 @@
 
      php-mode
      haskell-mode
+
+     ;; Goodies
+     auto-dim-other-buffers
      )))
 
 (condition-case nil
