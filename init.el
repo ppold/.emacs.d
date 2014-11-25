@@ -58,10 +58,12 @@
      rainbow-delimiters
      magit
      magit-gitflow
+     magit-gh-pulls
      git-gutter
      helm
      helm-themes
      helm-c-yasnippet
+     helm-open-github
      perspective
      projectile
      multi-term
