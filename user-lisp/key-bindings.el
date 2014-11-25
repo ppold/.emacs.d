@@ -79,8 +79,4 @@
 (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
 (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
 
-;; use windmove to navigate between windows easily
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-
 (provide 'key-bindings)
